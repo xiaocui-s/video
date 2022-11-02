@@ -1,0 +1,25 @@
+{
+    "name": "ggss/video",
+    "description": "this is an integrated video class",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Ggss\\Video\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "service"
+        }
+    ],
+    "require": {
+        "alibabacloud/sdk": "^1.8"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Video\\Provider\\VideoServiceProvider"
+            ]
+        }
+    }
+}
