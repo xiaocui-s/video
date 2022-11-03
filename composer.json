@@ -18,7 +18,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Video\\Provider\\VideoServiceProvider"
+                "Ggsss\\Video\\VideoServiceProvider"
             ]
         }
     }
