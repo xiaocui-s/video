@@ -1,6 +1,6 @@
 <?php
 
-namespace Video\Provider;
+namespace Ggsss\Video;
 
 use Illuminate\Support\ServiceProvider;
 
