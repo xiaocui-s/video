@@ -13,7 +13,8 @@
         }
     ],
     "require": {
-        "alibabacloud/sdk": "^1.8"
+        "alibabacloud/sdk": "^1.8",
+        "dcat/laravel-admin": "2.*"
     },
     "extra": {
         "laravel": {
