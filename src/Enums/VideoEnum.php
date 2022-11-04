@@ -1,9 +1,8 @@
 <?php
 
-namespace Yhdccc\Enums;
+namespace Yhdccc\Video\Enums;
 
 use BenSampo\Enum\Enum;
-use URL;
 
 /**
  * @method static static OptionOne()
