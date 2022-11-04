@@ -101,7 +101,7 @@ class VideoController extends AdminController
             $show->field('title', '标题');
             $show->field('desc', '简介');
             $show->field('content', '内容')->unescape();
-            $show->field('images.path', '图片')
+            $show->field('image', '图片')
                 ->as(function ($path) {
                     return HasUploadedFile::disk('oss')->url($path);
                 })
@@ -140,8 +140,6 @@ class VideoController extends AdminController
     {
         return Form::make(new Video(['images', 'category']), function (Form $form) {
             $videoRep = new Video();
-            $categoryRep = new Category();
-            $imageRep = new Image();
 
 //            //视频播放
 //            $videoPlayHtml = [];
@@ -159,12 +157,12 @@ class VideoController extends AdminController
                     }
                 });
             $form->textarea('content', '内容');
-            $form->image('images.path', '图片')
+            $form->image('image', '图片')
                 ->accept('jpg,png,gif,jpeg')
                 ->maxSize(1024)
-                ->customFormat(function ($paths) use ($imageRep) {
+                ->customFormat(function ($paths) use ($videoRep) {
                     //编辑表单处理图片格式
-                    return $imageRep->getImagesUrl($paths);
+                    return $videoRep->getImagesUrl($paths);
                 })
                 ->url('public/uploadFile/video')
                 ->rules('required', [
@@ -218,7 +216,7 @@ JS
 
             $form->hidden('duration', '时长');
 
-            $form->saving(function (Form $form) use ($videoRep, $categoryRep, $imageRep) {
+            $form->saving(function (Form $form) use ($videoRep) {
                 if ($form->status == 2 && (empty($this->status) || $this->status == 1)) {
                     $form->publish_at = date('Y-m-d H:i:s');
                 }
@@ -233,10 +231,7 @@ JS
 
                 if ($form->isEditing()) {
                     //替换img值(因编辑customFormat处理显示图片需再去除域名)
-                    $form->images = $imageRep->removeImagesUrl($form->images);
-
-                    //$imageRep->deleteImg($this->id, $videoRep->eloquentClass);
-                    $categoryRep->deleteCategoryRelation($this->id, $videoRep->eloquentClass);
+                    $form->images = $videoRep->removeImagesUrl($form->images);
                 }
 
             });
@@ -426,5 +421,67 @@ JS;
         }catch (\Throwable $e){
             return $this->responseErrorMessage('获取刷新凭证失败');
         }
+    }
+
+    /**
+     * 文件上传
+     *
+     * @param $action
+     * @param string $modelName
+     * @return mixed
+     * @throws \AlibabaCloud\Client\Exception\ClientException
+     * @throws \AlibabaCloud\Client\Exception\ServerException
+     * @throws \OSS\Core\OssException
+     */
+    public function uploadFile($action, $modelName = '')
+    {
+        // 判断是否是删除文件请求
+        if ($this->isDeleteRequest()) {
+            $column = \Request::get('_column');
+            $key = \Request::get('key');
+
+            if ($column == 'video_id') {
+                //删除VOD资源
+                AliVodService::deleteVideos($key);
+
+                //更新表数据
+                $modelName = "\App\Models\\" . $modelName;
+                if (!class_exists($modelName)) {
+                    return $this->responseErrorMessage('类名错误, 请联系管理员');
+                }
+                $model = new $modelName();
+                $model->where(['video_id' => $key])->update(['video_id' => '']);
+            }else {
+                //删除OSS资源
+                $url = HasUploadedFile::disk('oss')->url('');
+                $path = str_replace($url, '', $key);
+                $disk = HasUploadedFile::disk('oss');
+                $this->deleteFile($disk, $path);
+            }
+
+            return $this->responseDeleted();
+        }
+
+        // 获取上传的文件
+        $file = $this->file();
+
+        // 获取上传的字段名称
+        $column = $this->uploader()->upload_column;
+        if ($column == 'video_id') {
+            $title = $file->getClientOriginalName();
+            $path = $file->getPathname();
+            $result = AliVodService::UploadVideo($title, $title, $path);
+            $url = '';
+        }else {
+            $path = 'images/' . $action;
+            $result = HasUploadedFile::disk('oss')->putFile($path, $file);
+            $url = HasUploadedFile::disk('oss')->url($result);
+        }
+
+        if ($result) {
+            return $this->responseUploaded($result, $url);
+        }
+
+        return $this->responseErrorMessage('文件上传失败');
     }
 }

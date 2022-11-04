@@ -30,4 +30,43 @@ class Video extends EloquentRepository
         }
         return $result;
     }
+
+    /**
+     * 获取图片完整url
+     *
+     * @param $paths
+     * @return array|mixed|string
+     */
+    public function getImagesUrl($paths)
+    {
+        if (is_array($paths)) {
+            foreach ($paths as $key => $path) {
+                $paths[$key] = \Storage::disk('oss')->url($path);
+            }
+        }else {
+            $paths = \Storage::disk('oss')->url($paths);
+        }
+
+        return $paths;
+    }
+
+    /**
+     * 去除图片url
+     *
+     * @param $paths
+     * @return array|mixed|string
+     */
+    public function removeImagesUrl($paths)
+    {
+        $url = \Storage::disk('oss')->url('');
+        if (is_array($paths)) {
+            foreach ($paths as $key => $path) {
+                $paths[$key] = str_replace($url, '', $path);
+            }
+        }else {
+            $paths = str_replace($url, '', $paths);
+        }
+
+        return $paths;
+    }
 }
