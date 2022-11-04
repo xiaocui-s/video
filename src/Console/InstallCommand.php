@@ -27,9 +27,8 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        $this->comment('Publishing Telescope Configuration...');
         $this->callSilent('vendor:publish', ['--tag' => 'video-config']);
 
-        $this->info('Telescope scaffolding installed successfully.');
+        $this->info('video scaffolding installed successfully.');
     }
 }
