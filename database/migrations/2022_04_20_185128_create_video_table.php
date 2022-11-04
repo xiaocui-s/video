@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\PublishEnum;
+use Yhdccc\Enums\VideoEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -24,7 +24,7 @@ class CreateVideoTable extends Migration
             $table->integer('duration')->default(0)->comment('时间长度');
             $table->integer('publish_by')->nullable()->comment('发布人');
             $table->timestamp('publish_at')->nullable()->comment('发布时间');
-            $table->tinyInteger('status')->default(PublishEnum::NORMAL)->comment('状态 1:未发布 2已发布');
+            $table->tinyInteger('status')->default(VideoEnum::NORMAL)->comment('状态 1:未发布 2已发布');
             $table->tinyInteger('flag')->default(0)->comment('推荐状态 0:默认 1:已推荐');
             $table->tinyInteger('top')->default(0)->comment('置顶状态 0:默认 1:置顶');
             $table->integer('weight')->default(0)->comment('权重(排序专用)');
