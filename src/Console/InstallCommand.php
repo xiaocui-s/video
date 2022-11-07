@@ -28,6 +28,7 @@ class InstallCommand extends Command
     public function handle()
     {
         $this->callSilent('vendor:publish', ['--tag' => 'video-config']);
+        $this->callSilent('vendor:publish', ['--tag' => 'video-js']);
 
         $this->info('video scaffolding installed successfully.');
     }

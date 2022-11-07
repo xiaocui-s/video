@@ -31,9 +31,9 @@ class VideoController extends AdminController
             'create' => '创建',
         ];
         $this->js = [
-            'vendor/dcat-admin/dcat/plugins/aliyun-upload-sdk/aliyun-upload-sdk-1.5.3.min.js',
-            'vendor/dcat-admin/dcat/plugins/aliyun-upload-sdk/lib/aliyun-oss-sdk-6.17.1.min.js',
-            'vendor/dcat-admin/dcat/plugins/aliyun-upload-sdk/lib/es6-promise.min.js',
+            '/../vendor/yhdccc/video/src/Admin/Js/aliyun-upload-sdk/aliyun-upload-sdk-1.5.3.min.js',
+            '/../vendor/yhdccc/video/src/Admin/Js/liyun-upload-sdk/lib/aliyun-oss-sdk-6.17.1.min.js',
+            '/../vendor/yhdccc/video/src/Admin/Js/aliyun-upload-sdk/lib/es6-promise.min.js',
         ];
     }
 
@@ -235,6 +235,15 @@ JS
                 }
 
             });
+
+            $form->saved(function (Form $form, $result) {
+                if ($form->_inline_edit_) {
+                    return false;
+                }
+
+                dd($form->getKey());
+            });
+
             $form->display('created_at');
             $form->display('updated_at');
         });

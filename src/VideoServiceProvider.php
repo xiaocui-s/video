@@ -55,6 +55,10 @@ class VideoServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../config/video.php' => config_path('video.php'),
             ], 'video-config');
+
+            $this->publishes([
+                __DIR__.'./Admin/Js/aliyun-upload-sdk' => public_path('vendor/dcat-admin/dcat/plugins/aliyun-upload-sdk'),
+            ], 'video-js');
         }
     }
 
