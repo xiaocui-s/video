@@ -1,6 +1,6 @@
 <?php
 
-namespace Yhdccc\Video\Model;
+namespace Ggss\Video\Model;
 
 use App\Http\Traits\ModelWithCategoryTrait;
 use App\Http\Traits\ModelWithSearchTrait;

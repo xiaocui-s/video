@@ -1,8 +1,8 @@
 <?php
 
-namespace Yhdccc\Video\Admin\Repositories;
+namespace Ggss\Video\Admin\Repositories;
 
-use Yhdccc\Video\Model\Video as Model;
+use Ggss\Video\Model\Video as Model;
 use Dcat\Admin\Repositories\EloquentRepository;
 
 class Video extends EloquentRepository

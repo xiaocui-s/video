@@ -1,6 +1,6 @@
 <?php
 
-namespace Yhdccc\Video\Enums;
+namespace Ggss\Video\Enums;
 
 use BenSampo\Enum\Enum;
 

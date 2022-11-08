@@ -1,6 +1,6 @@
 <?php
 
-namespace Yhdccc\Video\Console;
+namespace Ggss\Video\Console;
 
 use Illuminate\Console\Command;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Yhdccc\Video;
+namespace Ggss\Video;
 
 use AlibabaCloud\Client\AlibabaCloud;
 use AlibabaCloud\Vod\Vod;

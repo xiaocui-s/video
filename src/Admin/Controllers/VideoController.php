@@ -1,12 +1,12 @@
 <?php
 
-namespace Yhdccc\Video\Admin\Controllers;
+namespace Ggss\Video\Admin\Controllers;
 
 use Illuminate\Http\Request;
-use Yhdccc\Video\Admin\Repositories\Video;
+use Ggss\Video\Admin\Repositories\Video;
 //use App\Enums\FlagEnum;
 //use App\Enums\TopEnum;
-use Yhdccc\Video\AliVodService;
+use Ggss\Video\AliVodService;
 use Dcat\Admin\Admin;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
@@ -15,7 +15,7 @@ use Dcat\Admin\Show;
 use Dcat\Admin\Http\Controllers\AdminController;
 use Dcat\Admin\Traits\HasUploadedFile;
 use Dcat\Admin\Widgets\Card;
-use Yhdccc\Video\Enums\VideoEnum;
+use Ggss\Video\Enums\VideoEnum;
 
 class VideoController extends AdminController
 {
@@ -31,9 +31,9 @@ class VideoController extends AdminController
             'create' => '创建',
         ];
         $this->js = [
-            '/../vendor/yhdccc/video/src/Admin/Js/aliyun-upload-sdk/aliyun-upload-sdk-1.5.3.min.js',
-            '/../vendor/yhdccc/video/src/Admin/Js/liyun-upload-sdk/lib/aliyun-oss-sdk-6.17.1.min.js',
-            '/../vendor/yhdccc/video/src/Admin/Js/aliyun-upload-sdk/lib/es6-promise.min.js',
+            '/../vendor/Ggss/video/src/Admin/Js/aliyun-upload-sdk/aliyun-upload-sdk-1.5.3.min.js',
+            '/../vendor/Ggss/video/src/Admin/Js/liyun-upload-sdk/lib/aliyun-oss-sdk-6.17.1.min.js',
+            '/../vendor/Ggss/video/src/Admin/Js/aliyun-upload-sdk/lib/es6-promise.min.js',
         ];
     }
 

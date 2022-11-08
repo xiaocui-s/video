@@ -1,6 +1,6 @@
 <?php
 
-use Yhdccc\Video\Enums\VideoEnum;
+use Ggss\Video\Enums\VideoEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

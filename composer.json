@@ -1,10 +1,10 @@
 {
-    "name": "yhdccc/video",
+    "name": "ggss/video",
     "description": "this is an integrated video class",
     "type": "library",
     "autoload": {
         "psr-4": {
-            "Yhdccc\\Video\\": "src/"
+            "Ggss\\Video\\": "src/"
         }
     },
     "authors": [
@@ -19,7 +19,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Yhdccc\\Video\\VideoServiceProvider"
+                "Ggss\\Video\\VideoServiceProvider"
             ]
         }
     }
