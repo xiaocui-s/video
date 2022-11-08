@@ -7,13 +7,20 @@ use Illuminate\Support\ServiceProvider;
 class VideoServiceProvider extends ServiceProvider
 {
     /**
+     * @var array
+     */
+    protected $commands = [
+        Console\InstallCommand::class,
+    ];
+
+    /**
      * Register services.
      *
      * @return void
      */
     public function register()
     {
-        //
+        $this->commands($this->commands);
     }
 
     /**
